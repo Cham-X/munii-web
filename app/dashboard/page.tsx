@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   DashboardLayout,
   NotificationPage,
@@ -11,18 +11,33 @@ import { BiUser } from "react-icons/bi";
 import { IoNotificationsOutline, IoWallet } from "react-icons/io5";
 
 const page = () => {
-  
+  const [navState, setNavState] = useState(false);
+
   const menuItems = [
-    { key: "Dashboard", content: <DashboardPage />, icon: BiUser },
-    { key: "Notification", content: <NotificationPage />, icon: IoWallet },
+    {
+      key: "Dashboard",
+      content: <DashboardPage setNavState={setNavState} />,
+      icon: BiUser,
+    },
+    {
+      key: "Notification",
+      content: <NotificationPage setNavState={setNavState} />,
+      icon: IoWallet,
+    },
     {
       key: "Subscription",
-      content: <SubscriptionPage />,
+      content: <SubscriptionPage setNavState={setNavState} />,
       icon: IoNotificationsOutline,
     },
   ];
 
-  return <DashboardLayout menuItems={menuItems} />;
+  return (
+    <DashboardLayout
+      navState={navState}
+      setNavState={setNavState}
+      menuItems={menuItems}
+    />
+  );
 };
 
 export default page;

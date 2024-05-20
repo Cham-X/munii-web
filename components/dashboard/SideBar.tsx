@@ -10,22 +10,10 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { IoMdClose } from "react-icons/io";
-import { IconType } from "react-icons";
 import { logo_green } from "@/public/images";
 import Image from "next/image";
+import { SideBarProps } from "@/types";
 
-interface MenuItem {
-  key: string;
-  icon?: IconType;
-}
-
-interface SideBarProps {
-  menuItems: MenuItem[];
-  selectedItem: string;
-  navState: Boolean;
-  setNavState: (state: any) => void;
-  onItemClick: (key: string) => void;
-}
 
 // navData, navState, setNavState
 

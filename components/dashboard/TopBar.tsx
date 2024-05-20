@@ -6,10 +6,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { avatar } from "@/public/images";
 import { IoIosSearch } from "react-icons/io";
+import { TopBarProps } from "@/types";
 
-interface TopBarProps {
-  setNavState: (state: any) => void;
-}
+
 
 const TopBar: React.FC<TopBarProps> = ({ setNavState }) => {
   return (

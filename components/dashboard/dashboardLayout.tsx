@@ -1,28 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Box, HStack, VStack } from "@chakra-ui/react";
-import { SideBar, TopBar } from "./index";
-import { IconType } from "react-icons";
+import { SideBar } from "./index";
+import { DashboardLayoutProps } from "@/types";
+  
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({
+  navState,
+  setNavState,
+  menuItems,
+}) => {
+  const [selectedItem, setSelectedItem] = useState(menuItems[0].key);
 
-interface MenuItem {
-  key: string;
-  content: React.ReactNode;
-  icon?: IconType;
-}
-
-interface DashboardLayoutProps {
-  menuItems: MenuItem[];
-}
-
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ menuItems }) => {
-  const [selectedItem, setSelectedItem] = useState("Dashboard");
-  const [navState, setNavState] = useState(false);
 
   const handleItemClick = (key: string) => {
     setSelectedItem(key);
     setNavState(false);
   };
+
+  const SelectedContent = menuItems.find(
+    (item) => item.key === selectedItem
+  )?.content;
 
   return (
     <HStack alignItems="flex-start" spacing={0}>
@@ -33,17 +31,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ menuItems }) => {
         setNavState={setNavState}
         onItemClick={handleItemClick}
       />
-      <VStack
-        ml={["0px", "0px", "250px", "250px"]}
-        minH="100vh"
-        w="100%"
-        // bg="#F4F2EE"
-      >
+      <VStack ml={["0px", "0px", "250px", "250px"]} minH="100vh" w="100%">
         <Box w="100%">
-          <TopBar setNavState={setNavState} />
-          <Box p={["10px", "10px", "20px", "20px"]}>
-            {menuItems.find((item) => item.key === selectedItem)?.content}
-          </Box>
+          {React.isValidElement(SelectedContent) && SelectedContent}
         </Box>
       </VStack>
     </HStack>
